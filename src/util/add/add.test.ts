@@ -34,4 +34,9 @@ describe('math', () => {
         expect(() => add(`1,-2`)).toThrow(`negatives not allowed: -2`)
         expect(() => add(`-2,-4`)).toThrow(`negatives not allowed: -2, -4`)
     })
+
+    // #6 Ignore numbers more than 1000
+    test('numbers more than 1000 should be ignored', () => {
+        expect(add(`1,2,10001, 1002`)).toBe(3)
+    })
 })
