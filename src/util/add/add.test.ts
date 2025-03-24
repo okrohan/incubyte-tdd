@@ -44,4 +44,10 @@ describe('math', () => {
     test('delimiters can be of any length', () => {
         expect(add('//[***]\n1***2***3')).toBe(6)
     })
+
+    // #8 Allow multiple delimiters
+    test('allows multiple delimiters', () => {
+        expect(add('//[*][%]\n1*2%3')).toBe(6)
+    })
+
 })
