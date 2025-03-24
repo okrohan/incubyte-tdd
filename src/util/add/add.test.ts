@@ -15,8 +15,12 @@ describe('math', () => {
         expect(add('1,2,3')).toBe(6)
     })
 
-    test('handles addition of n numbers',() => {
+    test('handles addition of more n numbers',() => {
         expect(add('1,2,3,4')).toBe(10)
     })
     
+    // #3 Allows new lines as seperator
+    test('handles new line as string separator',() => {
+        expect(add(`1\n2,3`)).toBe(6)
+    })
 })
