@@ -23,4 +23,9 @@ describe('math', () => {
     test('handles new line as string separator',() => {
         expect(add(`1\n2,3`)).toBe(6)
     })
+
+    // #4 Supports custom delimiter 
+    test('supports custom delimeter', () => {
+        expect(add(`//;\n1;2`)).toBe(3)
+    })
 })
