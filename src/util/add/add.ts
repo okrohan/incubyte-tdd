@@ -9,7 +9,11 @@ export function add(input: string): number {
         inputString = customString
     }
 
-    return inputString.split(delimeter).reduce((acc, num) => {
-        return acc + Number(num)
-    }, 0)
+    const inputNumbers = inputString.split(delimeter).map(numStr => Number(numStr))
+    const negativeNumbers = inputNumbers.filter(num => num < 0)
+    
+    if(negativeNumbers.length) 
+        throw new Error(`negatives not allowed: ${negativeNumbers.join(', ')}`)
+
+    return inputNumbers.reduce((acc, num) => acc + num, 0)
 }
