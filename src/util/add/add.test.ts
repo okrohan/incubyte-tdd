@@ -39,4 +39,9 @@ describe('math', () => {
     test('numbers more than 1000 should be ignored', () => {
         expect(add(`1,2,10001, 1002`)).toBe(3)
     })
+
+    // #7 Delimiters can be of any length
+    test('delimiters can be of any length', () => {
+        expect(add('//[***]\n1***2***3')).toBe(6)
+    })
 })
