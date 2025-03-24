@@ -50,4 +50,11 @@ describe('math', () => {
         expect(add('//[*][%]\n1*2%3')).toBe(6)
     })
 
+    // #8 Allow multiple delimiters of multiple char length
+    test("supports multiple custom delimiters of any length", () => {
+        expect(add("//[***][%%]\n1***2%%3")).toBe(6);
+        expect(add("//;;;\n1;;;2;;;3")).toBe(6);
+      });
+      
+
 })
