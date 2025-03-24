@@ -10,8 +10,13 @@ describe('math', () => {
         expect(add('1,2')).toBe(3)
     })
 
+    // #2 Adds numbers and handles edge cases
     test('handles addition of n numbers',() => {
         expect(add('1,2,3')).toBe(6)
+    })
+
+    test('handles addition of n numbers',() => {
+        expect(add('1,2,3,4')).toBe(10)
     })
     
 })
