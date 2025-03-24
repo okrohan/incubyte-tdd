@@ -1,4 +1,5 @@
 const DEFAULT_DELIMITER = /,|\n/
+const NUMBER_LIMIT = 1000
 
 export function add(input: string): number {
     let inputString = input;
@@ -9,7 +10,7 @@ export function add(input: string): number {
         inputString = customString
     }
 
-    const inputNumbers = inputString.split(delimeter).map(numStr => Number(numStr))
+    const inputNumbers = inputString.split(delimeter).map(numStr => Number(numStr)).filter(num => num <= NUMBER_LIMIT)
     const negativeNumbers = inputNumbers.filter(num => num < 0)
     
     if(negativeNumbers.length) 
