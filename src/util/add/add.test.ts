@@ -28,4 +28,10 @@ describe('math', () => {
     test('supports custom delimeter', () => {
         expect(add(`//;\n1;2`)).toBe(3)
     })
+
+    // #5 Disallow non negative numbers
+    test('negative numbers should throw exception', () => {
+        expect(() => add(`1,-2`)).toThrow(`negatives not allowed: -2`)
+        expect(() => add(`-2,-4`)).toThrow(`negatives not allowed: -2, -4`)
+    })
 })
