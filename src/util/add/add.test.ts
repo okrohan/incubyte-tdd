@@ -29,10 +29,15 @@ describe('math', () => {
         expect(add(`//;\n1;2`)).toBe(3)
     })
 
-    // #5 Disallow non negative numbers
+    // #5 Allow only valid inputs i.e postive numbers and zero for addn
     test('negative numbers should throw exception', () => {
-        expect(() => add(`1,-2`)).toThrow(`negatives not allowed: -2`)
-        expect(() => add(`-2,-4`)).toThrow(`negatives not allowed: -2, -4`)
+        expect(() => add(`1,-2`)).toThrow(`invalid input: -2`)
+        expect(() => add(`-2,-4`)).toThrow(`invalid input: -2, -4`)
+    })
+
+    test('characters in input should throw exception', () => {
+        expect(() => add(`1,a`)).toThrow(`invalid input: a`)
+        expect(() => add(`a,b`)).toThrow(`invalid input: a, b`)
     })
 
     // #6 Ignore numbers more than 1000

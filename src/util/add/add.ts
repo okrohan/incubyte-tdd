@@ -24,11 +24,21 @@ export function add(input: string): number {
         inputString = customString
     }
 
-    const inputNumbers = inputString.split(delimeter).map(numStr => Number(numStr)).filter(num => num <= NUMBER_LIMIT)
-    const negativeNumbers = inputNumbers.filter(num => num < 0)
+    const splitData = inputString.split(delimeter)
+    const invalidData: Array<string | number>  = [];
+    const cleanedNumbers: number[] = [];
+    splitData.forEach((item) => {
+        const itemParsed = Number(item);
+        if(isNaN(itemParsed) || itemParsed < 0) {
+            invalidData.push(item)
+        } else if(itemParsed <= NUMBER_LIMIT) {
+            cleanedNumbers.push(itemParsed)
+        }
+    })
     
-    if(negativeNumbers.length) 
-        throw new Error(`negatives not allowed: ${negativeNumbers.join(', ')}`)
 
-    return inputNumbers.reduce((acc, num) => acc + num, 0)
+    if(invalidData.length) 
+        throw new Error(`invalid input: ${invalidData.join(', ')}`)
+
+    return cleanedNumbers.reduce((acc, num) => acc + num, 0)
 }
