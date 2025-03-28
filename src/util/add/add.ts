@@ -32,6 +32,30 @@ function _processInputValidity(inputArr: InputElementType): [number[], InputElem
     return [cleanedNumbers, invalidCharacters]
 }
 
+function _processOutput(cleanedNumbers: number[]) {
+    const occuranceMap = cleanedNumbers.reduce((acc, num) => {
+        if(!acc.get(num)) {
+            acc.set(num, 1)
+        } else {
+            acc.set(num, acc.get(num) + 1)
+        }
+        return acc;
+    }, new Map())
+    
+    const keys = Array.from(occuranceMap.keys())
+
+    return keys.reduce((acc, num) => {
+        const count = occuranceMap.get(num)
+        if(count > 2) {
+            acc = acc + (num **3)
+        } else {
+            acc = acc + num
+        }
+
+        return acc
+    }, 0)
+}
+
 export function add(input: string): number {
     let inputString = input;
     let delimeter = DEFAULT_DELIMITER
@@ -48,5 +72,5 @@ export function add(input: string): number {
     if(invalidData.length) 
         throw new Error(`invalid input: ${invalidData.join(', ')}`)
 
-    return cleanedNumbers.reduce((acc, num) => acc + num, 0)
+    return _processOutput(cleanedNumbers)
 }

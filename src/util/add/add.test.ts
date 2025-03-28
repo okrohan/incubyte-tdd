@@ -60,6 +60,12 @@ describe('math', () => {
         expect(add("//[***][%%]\n1***2%%3")).toBe(6);
         expect(add("//;;;\n1;;;2;;;3")).toBe(6);
       });
-      
+
+    // #9 Duplicate numbers 
+    test("duplicate elements occuring more than twice should be added as cube of the element", () => {
+        expect(add("3,3,3,3")).toBe(27)
+        expect(add("3,3,3,3,2")).toBe(29)
+    });
+
 
 })
