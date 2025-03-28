@@ -2,6 +2,8 @@ const DEFAULT_DELIMITER = /,|\n/
 const BRACKED_CONTENT_REGEX = /\[([^\]]+)\]/g
 const NUMBER_LIMIT = 1000
 
+type InputElementType = Array<string | number>
+
 function _escapeRegExpString(string: string): string {
     return string.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
@@ -15,6 +17,21 @@ function _processCustomDelimeter(customDelimiter: string): RegExp {
     return new RegExp(_escapeRegExpString(customDelimiter))
 }
 
+function _processInputValidity(inputArr: InputElementType): [number[], InputElementType] {
+    const invalidCharacters: InputElementType = [];
+    const cleanedNumbers: number[] = [];
+    inputArr.forEach((item) => {
+        const itemParsed = Number(item);
+        if(isNaN(itemParsed) || itemParsed < 0) {
+            invalidCharacters.push(item)
+        } else if(itemParsed <= NUMBER_LIMIT) {
+            cleanedNumbers.push(itemParsed)
+        }
+    })
+
+    return [cleanedNumbers, invalidCharacters]
+}
+
 export function add(input: string): number {
     let inputString = input;
     let delimeter = DEFAULT_DELIMITER
@@ -25,16 +42,7 @@ export function add(input: string): number {
     }
 
     const splitData = inputString.split(delimeter)
-    const invalidData: Array<string | number>  = [];
-    const cleanedNumbers: number[] = [];
-    splitData.forEach((item) => {
-        const itemParsed = Number(item);
-        if(isNaN(itemParsed) || itemParsed < 0) {
-            invalidData.push(item)
-        } else if(itemParsed <= NUMBER_LIMIT) {
-            cleanedNumbers.push(itemParsed)
-        }
-    })
+    const [cleanedNumbers, invalidData] = _processInputValidity(splitData)
     
 
     if(invalidData.length) 
